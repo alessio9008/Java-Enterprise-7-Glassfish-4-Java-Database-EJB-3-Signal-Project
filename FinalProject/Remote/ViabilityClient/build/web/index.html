@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Viability Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- IN FOLDER JQUERY -->
+        <link rel="stylesheet" type="text/css" media="screen" href="jquery/jquery-ui.min.css" />
+        <script type="text/javascript" src="jquery/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery.json-2.4.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+
+        <!-- IN FOLDER CSS -->
+
+        <link rel="StyleSheet" type="text/css" href="css/bootstrap.min.css">
+        <script type="text/javascript" src="css/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/viabilityStyle.css">
+    </head>
+    <body>
+
+        <div id="aviability-container-title" class="common-container">
+            <h1>WELCOME SIR.</h1>
+        </div>
+
+        <div id="aviability-container-middle" class="common-container">
+
+            <form action="ClientServlet">
+
+                <div class="generic-data">
+                    <label>ACTION TYPE</label>
+                    <select id="type-signal" name="type-signal" class="form-control field-style">
+                        <option>INSERT</option>
+                        <option>MODIFY</option>
+                        <option>DELETE</option>
+                    </select>
+                </div>
+
+                <div id="data-to-hide" class="generic-data">
+                    <label>ID</label>
+                    <input type="text" id="id-field" name="id-field" class="form-control field-style"/>
+                </div>
+                <div class="generic-data">
+                    <label>Name & Surname</label>
+                    <input type="text" id="name-surname-field" name="name-surname-field" class="form-control field-style"/>
+                </div>
+                <div class="generic-data">
+                    <label>Age</label>
+                    <input type="text" id="age-field" name="age-field" class="form-control field-style"/>
+                </div>
+                <div class="generic-data">
+                    <label>District ID</label>
+                    <input type="text" id="district-id-field" name="district-id-field" class="form-control field-style"/>
+                </div>
+                <div class="generic-data">
+                    <label>Priority</label>
+                    <select id="priority-signal" name="priority-signal" class="form-control field-style">
+                        <option value="2">HIGH</option>
+                        <option value="0">LOW</option>
+                        <option value="1">AUTO</option>
+                    </select>
+                </div>
+
+
+                <div class="generic-data">
+                    <input type="submit" class="form-control btn btn-success" value="SUBMIT" />
+                </div>
+            </form>
+        </div>
+
+
+
+        <div id="aviability-container-bottom" class="common-container">
+            <label>Alessio Riccardo Gregory</label><br/><label>TerzaProva</label><br/><label>Sistemi Distribuiti - 2013/2014</label>
+        </div>
+
+
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>

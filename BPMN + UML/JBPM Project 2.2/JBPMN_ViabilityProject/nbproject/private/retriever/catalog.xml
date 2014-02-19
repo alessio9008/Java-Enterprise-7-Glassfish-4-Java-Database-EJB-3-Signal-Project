@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd" uri="www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd"/>
+    <system systemId="http://www.omg.org/spec/BPMN/2.0/20100501/BPMNDI.xsd" uri="www.omg.org/spec/BPMN/2.0/20100501/BPMNDI.xsd"/>
+    <system systemId="http://www.omg.org/spec/BPMN/2.0/20100501/Semantic.xsd" uri="www.omg.org/spec/BPMN/2.0/20100501/Semantic.xsd"/>
+    <system systemId="http://www.omg.org/spec/BPMN/2.0/20100501/DC.xsd" uri="www.omg.org/spec/BPMN/2.0/20100501/DC.xsd"/>
+    <system systemId="http://www.omg.org/spec/BPMN/2.0/20100501/DI.xsd" uri="www.omg.org/spec/BPMN/2.0/20100501/DI.xsd"/>
+</catalog>

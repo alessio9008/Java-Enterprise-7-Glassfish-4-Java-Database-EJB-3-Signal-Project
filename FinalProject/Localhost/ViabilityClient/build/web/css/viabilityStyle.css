@@ -1,0 +1,38 @@
+body
+{
+    background: #ccc;
+}
+
+.common-container
+{
+    width: 400px;
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+.generic-data
+{
+    margin-top: 20px;
+}
+
+.field-style
+{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+/*
+* BY ID
+*/
+
+#aviability-container-middle
+{
+    border-style:inset;
+    background: #dadada;
+}

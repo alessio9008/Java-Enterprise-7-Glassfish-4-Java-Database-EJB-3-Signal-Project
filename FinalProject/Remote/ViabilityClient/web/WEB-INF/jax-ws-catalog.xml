@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/WebServiceManager/WebServiceManager?WSDL" uri="wsdl/localhost_8080/WebServiceManager/WebServiceManager.wsdl"/>
+    <system systemId="http://localhost:8080/WebServiceManager/WebServiceManager?xsd=1" uri="wsdl/localhost_8080/WebServiceManager/WebServiceManager.xsd_1.xsd"/>
+    <system systemId="http://54.213.83.118:8080/WebServiceManager/WebServiceManager?WSDL" uri="wsdl/54.213.83.118_8080/WebServiceManager/WebServiceManager.wsdl"/>
+    <system systemId="http://54.213.83.118:8080/WebServiceManager/WebServiceManager?xsd=1" uri="wsdl/54.213.83.118_8080/WebServiceManager/WebServiceManager.xsd_1.xsd"/>
+</catalog>

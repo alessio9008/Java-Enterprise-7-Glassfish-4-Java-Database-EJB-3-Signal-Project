@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bpmn:definitions targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" expressionLanguage="http://www.w3.org/1999/XPath" typeLanguage="http://www.w3.org/2001/XMLSchema" exporter="jBPMN NB" exporterVersion="0.3" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jbpmn="http://jbpmn.java.net" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <bpmn:itemDefinition structureRef="viability.JBPMNMessage" id="_139094426643863"/>
+    <bpmn:error name="Fail to Insert" errorCode="" structureRef="_139094426643863" id="_1391001197224101"/>
+    <bpmn:error name="Fail to Remove" errorCode="" structureRef="_139094426643863" id="_1391001225552103"/>
+    <bpmn:message name="MessageParameter" itemRef="_139094426643863" id="_139094430065470"/>
+    <bpmn:interface name="viability.SignalService" id="_139094428650268">
+        <bpmn:operation name="sendSignal" id="_139094427715867">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="insertSignalToDatabase" id="_139094444606490">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="sendSignal" id="_139094447248391">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="sendSignal" id="_139094447248391">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="removeSignalToDatabase" id="_1390945519835100">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="modifySignalToDatabase" id="_1390947182072109">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="seeStatistics" id="_139098935517218">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="saveDatabase" id="_139099942808045">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="saveLogFile" id="_139099948967056">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="seeAverageAge" id="_1391003901112210">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="reinsertSignalToDatabase" id="_1391005540615222">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="averageSignalForMonthsHighPriorityByDistrict" id="_1391004054411212">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="averageSignalForMonthsByDistrict" id="_1391003970680211">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+        </bpmn:operation>
+        <bpmn:operation name="averageSignalForWeeksByDistrict" id="_1391003810319209">
+            <bpmn:inMessageRef>_139094430065470</bpmn:inMessageRef>
+            <bpmn:outMessageRef>_139094430065470</bpmn:outMessageRef>
+            <bpmn:errorRef>_1391001197224101</bpmn:errorRef>
+        </bpmn:operation>
+    </bpmn:interface>
+    <bpmn:process isClosed="false" name="ViabilityBPMN" id="ViabilityBPMN_PID">
+        <bpmn:property name="message" itemSubjectRef="_139094426643863" id="message"/>
+        <bpmn:startEvent isInterrupting="true" parallelMultiple="false" name="Start" id="_1390944182469">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.0}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:outgoing>_1390944254110</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:serviceTask implementation="Other" operationRef="_139094427715867" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Web Service Application Client" id="_1390944252776">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390944254110</bpmn:incoming>
+            <bpmn:incoming>_1390995973264</bpmn:incoming>
+            <bpmn:incoming>_1390996190072</bpmn:incoming>
+            <bpmn:outgoing>_1390944399406</bpmn:outgoing>
+            <bpmn:ioSpecification>
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" id="_139094431571073"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" id="_139094432403877"/>
+                <bpmn:inputSet id="_139094431628675">
+                    <bpmn:dataInputRefs>_139094431571073</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_139094432457479">
+                    <bpmn:dataOutputRefs>_139094432403877</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139094431571072">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139094431571073</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139094432403876">
+                <bpmn:sourceRef>_139094432403877</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1390944182469" targetRef="_1390944252776" id="_1390944254110"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" name="Web Service" id="_1390944389285">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390944399406</bpmn:incoming>
+            <bpmn:incoming>_1391008741625</bpmn:incoming>
+            <bpmn:outgoing>_1390944400814</bpmn:outgoing>
+            <bpmn:outgoing>_1390944402582</bpmn:outgoing>
+            <bpmn:outgoing>_1391002182616</bpmn:outgoing>
+            <bpmn:outgoing>_1391002976473</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:serviceTask implementation="Other" operationRef="_139094444606490" isForCompensation="false" startQuantity="1" completionQuantity="1" name="process Insert Request" id="_1390944391615">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390944400814</bpmn:incoming>
+            <bpmn:outgoing>_1390998526496</bpmn:outgoing>
+            <bpmn:ioSpecification>
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" id="_139094442888683"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" id="_139094443588687"/>
+                <bpmn:inputSet id="_139094442935885">
+                    <bpmn:dataInputRefs>_139094442888683</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_139094443629589">
+                    <bpmn:dataOutputRefs>_139094443588687</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139094442888682">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139094442888683</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139094443588686">
+                <bpmn:sourceRef>_139094443588687</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask implementation="Other" operationRef="_1390945519835100" isForCompensation="false" startQuantity="1" completionQuantity="1" name="process Remove Request" id="_1390944393843">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390944402582</bpmn:incoming>
+            <bpmn:outgoing>_1391000647209</bpmn:outgoing>
+            <bpmn:ioSpecification>
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" id="_139094448657593"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" id="_139094449532697"/>
+                <bpmn:inputSet id="_139094448700795">
+                    <bpmn:dataInputRefs>_139094448657593</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_139094449576699">
+                    <bpmn:dataOutputRefs>_139094449532697</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139094448657592">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139094448657593</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139094449532696">
+                <bpmn:sourceRef>_139094449532697</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1390944252776" targetRef="_1390944389285" id="_1390944399406"/>
+        <bpmn:sequenceFlow sourceRef="_1390944389285" targetRef="_1390944391615" id="_1390944400814">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_139094440379580">return message.getSignal().getType().equalsIgnoreCase("insert");</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1390944389285" targetRef="_1390944393843" id="_1390944402582">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_139094440379581">return message.getSignal().getType().equalsIgnoreCase("remove");</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:serviceTask implementation="Other" operationRef="_1390945519835100" isForCompensation="false" startQuantity="1" completionQuantity="1" name="process Remove Request" id="_1390947133818">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002211417</bpmn:incoming>
+            <bpmn:outgoing>_1391002237134</bpmn:outgoing>
+            <bpmn:ioSpecification>
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" id="_1390947160158102"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" id="_1390947174214106"/>
+                <bpmn:inputSet id="_1390947161543104">
+                    <bpmn:dataInputRefs>_1390947160158102</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1390947174934108">
+                    <bpmn:dataOutputRefs>_1390947174214106</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1390947160158101">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1390947160158102</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1390947174214105">
+                <bpmn:sourceRef>_1390947174214106</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" name="isDone" id="_1390998523098">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390998526496</bpmn:incoming>
+            <bpmn:outgoing>_1390998973664</bpmn:outgoing>
+            <bpmn:outgoing>_1391001449673</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="_1390944391615" targetRef="_1390998523098" id="_1390998526496"/>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="Insert Failed Notification" id="_1390998694477">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390998973664</bpmn:incoming>
+            <bpmn:outgoing>_1391000449736</bpmn:outgoing>
+            <bpmn:script>System.out.println("Entry with this ID already exists");</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1390998523098" targetRef="_1390998694477" id="_1390998973664">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_139099897871632">return message.getRequestPossible()==0;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:serviceTask implementation="Other" operationRef="_139099942808045" isForCompensation="false" startQuantity="1" completionQuantity="1" name="saveDatabase" id="_1390999218696">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999977056</bpmn:incoming>
+            <bpmn:outgoing>_1390999275704</bpmn:outgoing>
+            <bpmn:ioSpecification id="_139099921933136">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_139099944735248"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_139099945896851"/>
+                <bpmn:inputSet id="_139099944821649">
+                    <bpmn:dataInputRefs>_139099944735248</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_139099946005652">
+                    <bpmn:dataOutputRefs>_139099945896851</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139099944735247">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139099944735248</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139099945896850">
+                <bpmn:sourceRef>_139099945896851</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:serviceTask implementation="Other" operationRef="_139099948967056" isForCompensation="false" startQuantity="1" completionQuantity="1" name="saveLogFile" id="_1390999220971">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999978576</bpmn:incoming>
+            <bpmn:outgoing>_1390999280848</bpmn:outgoing>
+            <bpmn:ioSpecification id="_139099950637660">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_139099950500058"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_139099951646462"/>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139099950500057">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139099950500058</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139099951646461">
+                <bpmn:sourceRef>_139099951646462</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="Print DB Content" id="_1390999272798">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999275704</bpmn:incoming>
+            <bpmn:outgoing>_1390999724280</bpmn:outgoing>
+            <bpmn:ioSpecification id="_139099958383267">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_139099958216865"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_139099959276069"/>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139099958216864">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139099958216865</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139099959276068">
+                <bpmn:sourceRef>_139099959276069</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+            <bpmn:script>System.out.println("DBContents:\n"+message.getDatabase());</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1390999218696" targetRef="_1390999272798" id="_1390999275704"/>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="Print Log Content" id="_1390999277861">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999280848</bpmn:incoming>
+            <bpmn:outgoing>_1390999773072</bpmn:outgoing>
+            <bpmn:ioSpecification id="_139099961509674">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_139099961395272"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_139099962389676"/>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_139099961395271">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_139099961395272</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_139099962389675">
+                <bpmn:sourceRef>_139099962389676</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+            <bpmn:script>System.out.println("LogContents:\n"+message.getLogfile());</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1390999220971" targetRef="_1390999277861" id="_1390999280848"/>
+        <bpmn:endEvent name="Finish: DB Updated" id="_1390999288846">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":3.0}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.4}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999724280</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="_1390999272798" targetRef="_1390999288846" id="_1390999724280"/>
+        <bpmn:endEvent name="Finish LogFile updated" id="_1390999770655">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":3.0}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.4}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1390999773072</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="_1390999277861" targetRef="_1390999770655" id="_1390999773072"/>
+        <bpmn:parallelGateway gatewayDirection="Diverging" id="_1390999974650">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":4.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391001443025</bpmn:incoming>
+            <bpmn:outgoing>_1390999977056</bpmn:outgoing>
+            <bpmn:outgoing>_1390999978576</bpmn:outgoing>
+        </bpmn:parallelGateway>
+        <bpmn:sequenceFlow sourceRef="_1390999974650" targetRef="_1390999218696" id="_1390999977056"/>
+        <bpmn:sequenceFlow sourceRef="_1390999974650" targetRef="_1390999220971" id="_1390999978576"/>
+        <bpmn:endEvent name="Fail Insert" id="_1391000425778">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":3.0}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.5}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391000449736</bpmn:incoming>
+            <bpmn:errorEventDefinition errorRef="_1391001197224101" id="_139100042579087"/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="_1390998694477" targetRef="_1391000425778" id="_1391000449736"/>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="Remove Failed Notification" id="_1391000590921">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002261377</bpmn:incoming>
+            <bpmn:outgoing>_1391000721353</bpmn:outgoing>
+            <bpmn:script>System.out.println("ID to delete doesn't exit on database");</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" name="isDone" id="_1391000647193">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391000647209</bpmn:incoming>
+            <bpmn:outgoing>_1391001463873</bpmn:outgoing>
+            <bpmn:outgoing>_1391002271873</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="_1390944393843" targetRef="_1391000647193" id="_1391000647209"/>
+        <bpmn:endEvent name="Fail Remove" id="_1391000716702">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":3.0}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.5}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391000721353</bpmn:incoming>
+            <bpmn:errorEventDefinition errorRef="_1391001225552103" id="_139100071671393"/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="_1391000590921" targetRef="_1391000716702" id="_1391000721353"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="_1391001434753">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391001449673</bpmn:incoming>
+            <bpmn:incoming>_1391001463873</bpmn:incoming>
+            <bpmn:incoming>_1391002569241</bpmn:incoming>
+            <bpmn:incoming>_1391004141353</bpmn:incoming>
+            <bpmn:outgoing>_1391001443025</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="_1391001434753" targetRef="_1390999974650" id="_1391001443025">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391001498165121">return message.getRequestPossible()==1;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1390998523098" targetRef="_1391001434753" id="_1391001449673">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391001468470118">return message.getRequestPossible()==1;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1391000647193" targetRef="_1391001434753" id="_1391001463873">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391001480029119">return message.getRequestPossible()==1;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="notify Modify request" id="_1391002140008">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002182616</bpmn:incoming>
+            <bpmn:outgoing>_1391002211417</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391002144088123">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391002165920125"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391002174160128"/>
+                <bpmn:inputSet id="_1391002167008126">
+                    <bpmn:dataInputRefs>_1391002165920125</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391002174912129">
+                    <bpmn:dataOutputRefs>_1391002174160128</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391002165920124">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391002165920125</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391002174160127">
+                <bpmn:sourceRef>_1391002174160128</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+            <bpmn:script>System.out.println("Remove request on signal");</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1390944389285" targetRef="_1391002140008" id="_1391002182616">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002184443130">return message.getSignal().getType().equalsIgnoreCase("modify");</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1391002140008" targetRef="_1390947133818" id="_1391002211417"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" name="isDone" id="_1391002237114">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002237134</bpmn:incoming>
+            <bpmn:outgoing>_1391002269897</bpmn:outgoing>
+            <bpmn:outgoing>_1391002315474</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="_1390947133818" targetRef="_1391002237114" id="_1391002237134"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="_1391002258283">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":1.5}},"inner":{"background":{"startColor":"RGB(30,69,123)","endColor":"RGB(30,69,123)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002269897</bpmn:incoming>
+            <bpmn:incoming>_1391002271873</bpmn:incoming>
+            <bpmn:outgoing>_1391002261377</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="_1391002258283" targetRef="_1391000590921" id="_1391002261377">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002274429131">return message.getRequestPossible()==0;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1391002237114" targetRef="_1391002258283" id="_1391002269897">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002300758133">return message.getRequestPossible()==0;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1391000647193" targetRef="_1391002258283" id="_1391002271873">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002280701132">return message.getRequestPossible()==0;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:serviceTask implementation="Other" operationRef="_1391005540615222" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Signal Reinsert Request" id="_1391002312708">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002315474</bpmn:incoming>
+            <bpmn:outgoing>_1391002569241</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391002313290134">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391002453001140"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391002462129143"/>
+                <bpmn:inputSet id="_1391002453793141">
+                    <bpmn:dataInputRefs>_1391002453001140</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391002462649144">
+                    <bpmn:dataOutputRefs>_1391002462129143</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391002453001139">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391002453001140</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391002462129142">
+                <bpmn:sourceRef>_1391002462129143</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1391002237114" targetRef="_1391002312708" id="_1391002315474">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002317173135">return message.getRequestPossible()==1;</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow sourceRef="_1391002312708" targetRef="_1391001434753" id="_1391002569241"/>
+        <bpmn:scriptTask isForCompensation="false" startQuantity="1" completionQuantity="1" name="notify statistics view request" id="_1391002953044">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391002976473</bpmn:incoming>
+            <bpmn:outgoing>_1391003292129</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391002953455149">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003009048152"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003017617155"/>
+                <bpmn:inputSet id="_1391003009809153">
+                    <bpmn:dataInputRefs>_1391003009048152</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391003018369156">
+                    <bpmn:dataOutputRefs>_1391003017617155</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391003009048151">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391003009048152</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391003017617154">
+                <bpmn:sourceRef>_1391003017617155</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+            <bpmn:script>System.out.println("Statistics View Request on signal");message.setRequestPossible(1);</bpmn:script>
+        </bpmn:scriptTask>
+        <bpmn:sequenceFlow sourceRef="_1390944389285" targetRef="_1391002953044" id="_1391002976473">
+            <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="http://www.java.com/java" id="_1391002982456150">return message.getSignal().getType().equalsIgnoreCase("statistics");</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:serviceTask implementation="Other" operationRef="_1391003901112210" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Average Age of Signal User on DB" id="_1391003289855">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391003292129</bpmn:incoming>
+            <bpmn:outgoing>_1391003339329</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391003290295177">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003310856179"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003318784182"/>
+                <bpmn:inputSet id="_1391003311593180">
+                    <bpmn:dataInputRefs>_1391003310856179</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391003319265183">
+                    <bpmn:dataOutputRefs>_1391003318784182</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391003310856178">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391003310856179</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391003318784181">
+                <bpmn:sourceRef>_1391003318784182</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1391002953044" targetRef="_1391003289855" id="_1391003292129"/>
+        <bpmn:serviceTask implementation="Other" operationRef="_1391003810319209" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Average Signal for Week ( DEMO week=15 seconds )" id="_1391003336906">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391003339329</bpmn:incoming>
+            <bpmn:outgoing>_1391003367905</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391003337408187">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003349625189"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003358104192"/>
+                <bpmn:inputSet id="_1391003350497190">
+                    <bpmn:dataInputRefs>_1391003349625189</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391003359137193">
+                    <bpmn:dataOutputRefs>_1391003358104192</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391003349625188">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391003349625189</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391003358104191">
+                <bpmn:sourceRef>_1391003358104192</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1391003289855" targetRef="_1391003336906" id="_1391003339329"/>
+        <bpmn:serviceTask implementation="Other" operationRef="_1391003970680211" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Average Signal for Month ( DEMO week=120 seconds )" id="_1391003366484">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391003367905</bpmn:incoming>
+            <bpmn:outgoing>_1391003403537</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391003368109194">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003379473196"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003388529200"/>
+                <bpmn:inputSet id="_1391003382137198">
+                    <bpmn:dataInputRefs>_1391003379473196</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391003389353201">
+                    <bpmn:dataOutputRefs>_1391003388529200</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391003379473195">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391003379473196</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391003388529199">
+                <bpmn:sourceRef>_1391003388529200</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1391003336906" targetRef="_1391003366484" id="_1391003367905"/>
+        <bpmn:serviceTask implementation="Other" operationRef="_1391004054411212" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Average Signal with High Priority for \nMonth ( DEMO week=120 seconds )" id="_1391003399901">
+            <bpmn:extensionElements>
+                <jbpmn:ShapeDesign>{"outer":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(226,232,236)"},"border":{"color":"RGB(108,142,183)","width":2.5}},"inner":{"background":{"startColor":"RGB(255,255,255)","endColor":"RGB(255,248,159)"},"border":{"color":"RGB(30,69,123)","width":1.0}}}</jbpmn:ShapeDesign>
+            </bpmn:extensionElements>
+            <bpmn:incoming>_1391003403537</bpmn:incoming>
+            <bpmn:outgoing>_1391004141353</bpmn:outgoing>
+            <bpmn:ioSpecification id="_1391003400598202">
+                <bpmn:dataInput name="Parameter" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003413137204"/>
+                <bpmn:dataOutput name="Result" itemSubjectRef="_139094426643863" isCollection="false" id="_1391003421560207"/>
+                <bpmn:inputSet id="_1391003413753205">
+                    <bpmn:dataInputRefs>_1391003413137204</bpmn:dataInputRefs>
+                </bpmn:inputSet>
+                <bpmn:outputSet id="_1391003422041208">
+                    <bpmn:dataOutputRefs>_1391003421560207</bpmn:dataOutputRefs>
+                </bpmn:outputSet>
+            </bpmn:ioSpecification>
+            <bpmn:dataInputAssociation id="_1391003413136203">
+                <bpmn:sourceRef>message</bpmn:sourceRef>
+                <bpmn:targetRef>_1391003413137204</bpmn:targetRef>
+            </bpmn:dataInputAssociation>
+            <bpmn:dataOutputAssociation id="_1391003421560206">
+                <bpmn:sourceRef>_1391003421560207</bpmn:sourceRef>
+                <bpmn:targetRef>message</bpmn:targetRef>
+            </bpmn:dataOutputAssociation>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow sourceRef="_1391003366484" targetRef="_1391003399901" id="_1391003403537"/>
+        <bpmn:sequenceFlow sourceRef="_1391003399901" targetRef="_1391001434753" id="_1391004141353"/>
+        <bpmn:textAnnotation textFormat="text/plain" id="_1390995965739">
+            <bpmn:text>The Web Service Application Client runs on client local machine</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:association sourceRef="_1390995965739" targetRef="_1390944252776" id="_1390995973264"/>
+        <bpmn:textAnnotation textFormat="text/plain" id="_1390996095911">
+            <bpmn:text>Enterprise Application: it runs on Amazon Virtual Machine</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:textAnnotation textFormat="text/plain" id="_1390996187398">
+            <bpmn:text>Operation: Client sends a Signal to EE Application using the web service application client</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:association sourceRef="_1390996187398" targetRef="_1390944252776" id="_1390996190072"/>
+        <bpmn:group id="_1390999806861"/>
+        <bpmn:association sourceRef="_1390996095911" targetRef="_1390999806861" id="_1390999830616"/>
+        <bpmn:group id="_1391008644926"/>
+        <bpmn:textAnnotation textFormat="text/plain" id="_1391008689926">
+            <bpmn:text>Web Service that dispatchs signal requesto to statefull beans</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:association sourceRef="_1391008689926" targetRef="_1390944389285" id="_1391008741625"/>
+        <bpmn:textAnnotation textFormat="text/plain" id="_1391008749226">
+            <bpmn:text>Statefull bean thar process signal request</bpmn:text>
+        </bpmn:textAnnotation>
+        <bpmn:association sourceRef="_1391008749226" targetRef="_1391008644926" id="_1391008761641"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="_13910250299728">
+        <bpmndi:BPMNPlane id="_13910250299729">
+            <bpmndi:BPMNShape bpmnElement="_1390944182469" id="_1390944182469_gui">
+                <omgdc:Bounds x="56.0" y="195.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="61.0" y="246.0" width="31.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390944252776" id="_1390944252776_gui">
+                <omgdc:Bounds x="178.0" y="184.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="123.0" y="253.0" width="188.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390944389285" id="_1390944389285_gui">
+                <omgdc:Bounds x="375.0" y="206.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="357.0" y="257.0" width="76.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390944391615" id="_1390944391615_gui">
+                <omgdc:Bounds x="597.0" y="114.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="569.0" y="187.0" width="146.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390944393843" id="_1390944393843_gui">
+                <omgdc:Bounds x="597.0" y="331.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="562.0" y="404.0" width="159.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390947133818" id="_1390947133818_gui">
+                <omgdc:Bounds x="689.0" y="578.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="680.0" y="651.0" width="159.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390998523098" id="_1390998523098_gui">
+                <omgdc:Bounds x="727.0" y="125.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="716.0" y="176.0" width="43.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390998694477" id="_1390998694477_gui">
+                <omgdc:Bounds x="847.0" y="103.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="827.0" y="176.0" width="152.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999218696" id="_1390999218696_gui">
+                <omgdc:Bounds x="1341.0" y="314.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1334.0" y="387.0" width="90.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999220971" id="_1390999220971_gui">
+                <omgdc:Bounds x="1341.0" y="462.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1344.0" y="535.0" width="72.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999272798" id="_1390999272798_gui">
+                <omgdc:Bounds x="1465.0" y="314.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1452.0" y="387.0" width="104.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999277861" id="_1390999277861_gui">
+                <omgdc:Bounds x="1465.0" y="462.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1443.0" y="538.0" width="109.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999288846" id="_1390999288846_gui">
+                <omgdc:Bounds x="1716.0" y="325.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1718.0" y="376.0" width="119.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999770655" id="_1390999770655_gui">
+                <omgdc:Bounds x="1716.0" y="473.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1666.0" y="524.0" width="140.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390999974650" id="_1390999974650_gui">
+                <omgdc:Bounds x="1264.0" y="410.0" width="42.0" height="42.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391000425778" id="_1391000425778_gui">
+                <omgdc:Bounds x="977.0" y="114.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="966.0" y="165.0" width="61.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391000590921" id="_1391000590921_gui">
+                <omgdc:Bounds x="927.0" y="473.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="883.0" y="546.0" width="165.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391000647193" id="_1391000647193_gui">
+                <omgdc:Bounds x="727.0" y="338.0" width="50.0" height="50.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="728.0" y="392.0" width="45.0" height="17.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391000716702" id="_1391000716702_gui">
+                <omgdc:Bounds x="1039.0" y="484.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1022.0" y="535.0" width="74.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391001434753" id="_1391001434753_gui">
+                <omgdc:Bounds x="1133.0" y="410.0" width="42.0" height="42.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391002140008" id="_1391002140008_gui">
+                <omgdc:Bounds x="569.0" y="578.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="539.0" y="651.0" width="130.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391002237114" id="_1391002237114_gui">
+                <omgdc:Bounds x="805.0" y="589.0" width="42.0" height="42.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="803.0" y="640.0" width="43.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391002258283" id="_1391002258283_gui">
+                <omgdc:Bounds x="831.0" y="484.0" width="42.0" height="42.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391002312708" id="_1391002312708_gui">
+                <omgdc:Bounds x="1071.0" y="578.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1035.0" y="651.0" width="150.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391002953044" id="_1391002953044_gui">
+                <omgdc:Bounds x="549.0" y="912.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="513.0" y="984.0" width="178.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391003289855" id="_1391003289855_gui">
+                <omgdc:Bounds x="739.0" y="912.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="777.0" y="984.0" width="211.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391003336906" id="_1391003336906_gui">
+                <omgdc:Bounds x="927.0" y="883.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="889.0" y="955.0" width="329.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391003366484" id="_1391003366484_gui">
+                <omgdc:Bounds x="1133.0" y="848.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1023.0" y="921.0" width="342.0" height="15.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391003399901" id="_1391003399901_gui">
+                <omgdc:Bounds x="1265.0" y="819.0" width="80.0" height="64.0"/>
+                <bpmndi:BPMNLabel>
+                    <omgdc:Bounds x="1303.0" y="891.0" width="226.0" height="29.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1390944254110" id="_1390944254110_gui">
+                <omgdi:waypoint x="98.0" y="216.0"/>
+                <omgdi:waypoint x="179.0" y="216.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390944399406" id="_1390944399406_gui">
+                <omgdi:waypoint x="256.0" y="217.0"/>
+                <omgdi:waypoint x="373.0" y="217.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390944400814" id="_1390944400814_gui">
+                <omgdi:waypoint x="415.0" y="223.0"/>
+                <omgdi:waypoint x="595.0" y="159.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390944402582" id="_1390944402582_gui">
+                <omgdi:waypoint x="412.0" y="232.0"/>
+                <omgdi:waypoint x="597.0" y="340.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390998526496" id="_1390998526496_gui">
+                <omgdi:waypoint x="675.0" y="145.0"/>
+                <omgdi:waypoint x="725.0" y="145.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390998973664" id="_1390998973664_gui">
+                <omgdi:waypoint x="769.0" y="145.0"/>
+                <omgdi:waypoint x="847.0" y="138.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999275704" id="_1390999275704_gui">
+                <omgdi:waypoint x="1419.0" y="345.0"/>
+                <omgdi:waypoint x="1466.0" y="346.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999280848" id="_1390999280848_gui">
+                <omgdi:waypoint x="1419.0" y="493.0"/>
+                <omgdi:waypoint x="1466.0" y="493.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999724280" id="_1390999724280_gui">
+                <omgdi:waypoint x="1543.0" y="345.0"/>
+                <omgdi:waypoint x="1716.0" y="346.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999773072" id="_1390999773072_gui">
+                <omgdi:waypoint x="1541.0" y="493.0"/>
+                <omgdi:waypoint x="1716.0" y="493.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999977056" id="_1390999977056_gui">
+                <omgdi:waypoint x="1298.0" y="421.0"/>
+                <omgdi:waypoint x="1345.0" y="375.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1390999978576" id="_1390999978576_gui">
+                <omgdi:waypoint x="1300.0" y="437.0"/>
+                <omgdi:waypoint x="1343.0" y="468.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391000449736" id="_1391000449736_gui">
+                <omgdi:waypoint x="923.0" y="134.0"/>
+                <omgdi:waypoint x="977.0" y="134.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391000647209" id="_1391000647209_gui">
+                <omgdi:waypoint x="675.0" y="362.0"/>
+                <omgdi:waypoint x="725.0" y="362.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391000721353" id="_1391000721353_gui">
+                <omgdi:waypoint x="1005.0" y="504.0"/>
+                <omgdi:waypoint x="1035.0" y="505.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391001443025" id="_1391001443025_gui">
+                <omgdi:waypoint x="1176.0" y="430.0"/>
+                <omgdi:waypoint x="1262.0" y="430.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391001449673" id="_1391001449673_gui">
+                <omgdi:waypoint x="762.0" y="152.0"/>
+                <omgdi:waypoint x="1138.0" y="423.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391001463873" id="_1391001463873_gui">
+                <omgdi:waypoint x="776.0" y="364.0"/>
+                <omgdi:waypoint x="1132.0" y="428.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002182616" id="_1391002182616_gui">
+                <omgdi:waypoint x="401.0" y="243.0"/>
+                <omgdi:waypoint x="590.0" y="578.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002211417" id="_1391002211417_gui">
+                <omgdi:waypoint x="647.0" y="609.0"/>
+                <omgdi:waypoint x="687.0" y="609.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002237134" id="_1391002237134_gui">
+                <omgdi:waypoint x="767.0" y="609.0"/>
+                <omgdi:waypoint x="803.0" y="609.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002261377" id="_1391002261377_gui">
+                <omgdi:waypoint x="874.0" y="504.0"/>
+                <omgdi:waypoint x="928.0" y="505.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002269897" id="_1391002269897_gui">
+                <omgdi:waypoint x="828.0" y="589.0"/>
+                <omgdi:waypoint x="849.0" y="525.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002271873" id="_1391002271873_gui">
+                <omgdi:waypoint x="760.0" y="380.0"/>
+                <omgdi:waypoint x="844.0" y="489.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002315474" id="_1391002315474_gui">
+                <omgdi:waypoint x="848.0" y="609.0"/>
+                <omgdi:waypoint x="1072.0" y="610.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002569241" id="_1391002569241_gui">
+                <omgdi:waypoint x="1118.0" y="579.0"/>
+                <omgdi:waypoint x="1151.0" y="451.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391002976473" id="_1391002976473_gui">
+                <omgdi:waypoint x="398.0" y="246.0"/>
+                <omgdi:waypoint x="579.0" y="910.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391003292129" id="_1391003292129_gui">
+                <omgdi:waypoint x="627.0" y="943.0"/>
+                <omgdi:waypoint x="740.0" y="944.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391003339329" id="_1391003339329_gui">
+                <omgdi:waypoint x="816.0" y="937.0"/>
+                <omgdi:waypoint x="927.0" y="921.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391003367905" id="_1391003367905_gui">
+                <omgdi:waypoint x="1006.0" y="907.0"/>
+                <omgdi:waypoint x="1131.0" y="887.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391003403537" id="_1391003403537_gui">
+                <omgdi:waypoint x="1212.0" y="870.0"/>
+                <omgdi:waypoint x="1263.0" y="860.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="_1391004141353" id="_1391004141353_gui">
+                <omgdi:waypoint x="1292.0" y="819.0"/>
+                <omgdi:waypoint x="1162.0" y="452.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="_1390995965739" id="_1390995965739_gui">
+                <omgdc:Bounds x="56.0" y="61.0" width="170.0" height="88.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1390995973264" id="_1390995973264_gui">
+                <omgdi:waypoint x="171.0" y="150.0"/>
+                <omgdi:waypoint x="195.0" y="183.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="_1390996095911" id="_1390996095911_gui">
+                <omgdc:Bounds x="113.0" y="642.0" width="113.0" height="101.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1390996187398" id="_1390996187398_gui">
+                <omgdc:Bounds x="34.0" y="290.0" width="224.0" height="63.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1390996190072" id="_1390996190072_gui">
+                <omgdi:waypoint x="168.0" y="289.0"/>
+                <omgdi:waypoint x="196.0" y="245.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="_1390999806861" id="_1390999806861_gui">
+                <omgdc:Bounds x="337.0" y="-63.0" width="1367.0" height="1210.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1390999830616" id="_1390999830616_gui">
+                <omgdi:waypoint x="226.0" y="681.0"/>
+                <omgdi:waypoint x="355.0" y="662.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="_1391008644926" id="_1391008644926_gui">
+                <omgdc:Bounds x="505.0" y="72.0" width="1142.0" height="984.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="_1391008689926" id="_1391008689926_gui">
+                <omgdc:Bounds x="375.0" y="99.0" width="100.0" height="50.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1391008741625" id="_1391008741625_gui">
+                <omgdi:waypoint x="418.0" y="151.0"/>
+                <omgdi:waypoint x="398.0" y="207.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="_1391008749226" id="_1391008749226_gui">
+                <omgdc:Bounds x="389.0" y="947.0" width="100.0" height="50.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="_1391008761641" id="_1391008761641_gui">
+                <omgdi:waypoint x="478.0" y="946.0"/>
+                <omgdi:waypoint x="513.0" y="930.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>
