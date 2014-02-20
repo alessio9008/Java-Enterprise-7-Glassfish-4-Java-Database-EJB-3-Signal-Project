@@ -25,4 +25,4 @@ The signals are built with:
 The system has been designed with a BPMN workflow and was deployed in a remote virtual machine (Amazon - AWS). 
 The client through which the user communicate with the system in particular with the web services is built with a web page and one servlet.
 
-This project was developed by Alessio Oglialoro, Gregory Callea and Riccardo Nocita.
+This project was developed by Alessio Oglialoro, Gregory Callea and Riccardo Nocita
