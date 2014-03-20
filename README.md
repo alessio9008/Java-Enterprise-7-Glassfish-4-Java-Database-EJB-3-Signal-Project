@@ -1,4 +1,4 @@
-Java-Enterprise-7-Glassfish-4-Java-Database-EJB-3-Signal-Project
+Java Enterprise 7 Glassfish 4 Java Database EJB 3 Signal Project
 ================================================================
 
 The system consist of: 
